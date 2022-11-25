@@ -1,0 +1,14 @@
+<div class = "card-content">
+    <div class = "title">Attractions</div>
+    <repeat group="{{ @attractions }}" value="{{ @attraction }}">
+        <div class="card text-white bg-dark mb-3" style="width: 18rem;" title type site>
+            <img class="card-img-top" src="" alt="Attraction image cap">
+            <div class="card-body">
+                <h5 class="attraction-title">{{ @attraction->attr_name }}</h5>
+                <p class="attraction-type">{{ @attraction->type }}</p>
+                <a href="#" class="btn btn-primary">Official site</a>
+            </div>
+        </div>
+    </repeat>
+</div>
+

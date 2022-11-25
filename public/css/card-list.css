@@ -1,0 +1,12 @@
+.title {
+    font-family: 'Patrick Hand', cursive;
+    font-size: large;
+    text-align: center;
+}
+
+.card-deck {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 30px;
+}
