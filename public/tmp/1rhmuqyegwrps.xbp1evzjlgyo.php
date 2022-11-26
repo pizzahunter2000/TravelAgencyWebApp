@@ -21,9 +21,7 @@
 </head>
 
 <body>
-  <div>
-    <?php echo $this->render($content,NULL,get_defined_vars(),0); ?>
-  </div>
+  <?php echo $this->render($content,NULL,get_defined_vars(),0); ?>
 </body>
 
 </html>
