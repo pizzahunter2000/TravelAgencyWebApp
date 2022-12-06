@@ -10,12 +10,11 @@
                 Country &raquo;
             </a>
             <ul class="dropdown-menu dropdown-submenu">
-                <li>
-                    <a class="dropdown-item" href="#">Submenu item 1</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Submenu item 2</a>
-                </li>
+                <?php foreach (($countries?:[]) as $country): ?>
+                    <li>
+                        <a class="dropdown-item" href="#"><?= ($country->country_id) ?></a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </li>
         <li>
@@ -23,12 +22,11 @@
                 Type &raquo;
             </a>
             <ul class="dropdown-menu dropdown-submenu">
-                <li>
-                    <a class="dropdown-item" href="#">Submenu item 3</a>
-                </li>
-                <li>
-                    <a class="dropdown-item" href="#">Submenu item 4</a>
-                </li>
+                <?php foreach (($types?:[]) as $type): ?>
+                    <li>
+                        <a class="dropdown-item" href="#"><?= ($type->type) ?></a>
+                    </li>
+                <?php endforeach; ?>
             </ul>
         </li>
     </ul>

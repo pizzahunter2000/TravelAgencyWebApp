@@ -8,7 +8,7 @@
           <div class="card-body">
               <h5 class="attraction-title"><?= ($attraction->attr_name) ?></h5>
               <p class="attraction-type"><?= ($attraction->type) ?></p>
-              <a href="#" class="btn btn-primary">Official site</a>
+              <a target="_blank"  href="<?= ($attraction->website) ?>" class="btn btn-primary">Official site</a>
           </div>
         </div>
       </li>

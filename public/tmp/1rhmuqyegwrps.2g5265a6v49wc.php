@@ -3,6 +3,6 @@
 </div>
 
 <div class="container-fluid py-5" style = "background-image: linear-gradient(rgb(161, 85, 164), rgb(75, 152, 211));
-    width: 100%; overflow: hidden;">
+    width: 100%;">
   <?php echo $this->render('card_flexbox.html',NULL,get_defined_vars(),0); ?>
 </div>
