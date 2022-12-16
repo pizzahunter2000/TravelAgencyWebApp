@@ -31,8 +31,8 @@
                 </li>
                 <repeat group="{{ @types }}" value="{{ @type }}">
                     <li>
-                        <a class="dropdown-item" href="/viewAttractionsOfAType/{{ @type->type }} ">
-                            {{ @type->type }}</a>
+                        <a class="dropdown-item" href="/viewAttractionsOfAType/{{ @type.id }} ">
+                            {{ @type.type }}</a>
                     </li>
                 </repeat>
             </ul>

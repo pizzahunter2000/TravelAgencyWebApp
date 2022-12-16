@@ -19,7 +19,8 @@ class AttractionManager extends Controller
 				//$f3->set('countries', $countries);
 				$f3->set('countries', $db->exec('SELECT distinct country.id, country.country_name
 					FROM country JOIN attraction ON country.id = attraction.country_id'));
-				$f3->set('types', $types);
+				$f3->set('types', $db->exec('SELECT distinct attraction_type.id, attraction_type.type
+					FROM attraction_type JOIN attraction ON attraction_type.id = attraction.type'));
 
 				$f3->set('attraction', $attractions);
 				$f3->set('html_title', 'Every Attraction');
@@ -41,7 +42,7 @@ class AttractionManager extends Controller
 				}
 
 				$attractionsMap = new DB\SQL\Mapper($db, 'attraction');
-				$attractions = $attractionsMap->find(array('type LIKE ?', $attractionType),
+				$attractions = $attractionsMap->find(array('type = ?', $attractionType),
 				 array('order' => 'id'));
 
 				$types = $attractionsMap->find(
@@ -50,7 +51,8 @@ class AttractionManager extends Controller
 
 				$f3->set('countries', $db->exec('SELECT distinct country.id, country.country_name
 					FROM country JOIN attraction ON country.id = attraction.country_id'));
-				$f3->set('types', $types);
+				$f3->set('types', $db->exec('SELECT distinct attraction_type.id, attraction_type.type
+					FROM attraction_type JOIN attraction ON attraction_type.id = attraction.type'));
 
 				$f3->set('attraction', $attractions);
 				$f3->set('html_title', 'Filtered Attractions');
@@ -82,7 +84,9 @@ class AttractionManager extends Controller
 
 				$f3->set('countries', $db->exec('SELECT distinct country.id, country.country_name
 					FROM country JOIN attraction ON country.id = attraction.country_id'));
-				$f3->set('types', $types);
+				//$f3->set('types', $types);
+				$f3->set('types', $db->exec('SELECT distinct attraction_type.id, attraction_type.type
+					FROM attraction_type JOIN attraction ON attraction_type.id = attraction.type'));
 
 				$f3->set('attraction', $attractions);
 				$f3->set('html_title', 'Filtered Attractions');
