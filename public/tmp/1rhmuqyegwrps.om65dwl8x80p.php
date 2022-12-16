@@ -10,9 +10,13 @@
                 Country &raquo;
             </a>
             <ul class="dropdown-menu dropdown-submenu">
+                <li>
+                    <a class="dropdown-item" href="/viewAttractions">No Filter</a>
+                </li>
                 <?php foreach (($countries?:[]) as $country): ?>
                     <li>
-                        <a class="dropdown-item" href="#"><?= ($country->country_id) ?></a>
+                        <a class="dropdown-item" href="/viewAttractionsInACountry/<?= ($country['id']) ?>">
+                            <?= ($country['country_name']) ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>
@@ -22,9 +26,13 @@
                 Type &raquo;
             </a>
             <ul class="dropdown-menu dropdown-submenu">
+                <li>
+                    <a class="dropdown-item" href="/viewAttractions">No Filter</a>
+                </li>
                 <?php foreach (($types?:[]) as $type): ?>
                     <li>
-                        <a class="dropdown-item" href="#"><?= ($type->type) ?></a>
+                        <a class="dropdown-item" href="/viewAttractionsOfAType/<?= ($type->type) ?> ">
+                            <?= ($type->type) ?></a>
                     </li>
                 <?php endforeach; ?>
             </ul>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height: 100%;">
 
 
 <head>
@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="/css/dropdown.css">
 </head>
 
-<body>
+<body style="height: 100%;">
   <?php echo $this->render($content,NULL,get_defined_vars(),0); ?>
 </body>
 
