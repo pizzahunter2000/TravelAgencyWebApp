@@ -7,7 +7,7 @@
     <?php echo $this->render('attraction_filter.html',NULL,get_defined_vars(),0); ?>
     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
         <li>
-            <a href="#" class="nav-link text-secondary">
+            <a href="/mainPage" class="nav-link text-secondary">
             Home
             </a>
         </li>
