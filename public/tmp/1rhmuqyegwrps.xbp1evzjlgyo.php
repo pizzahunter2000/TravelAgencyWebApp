@@ -18,6 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="/css/dropdown.css">
+  <link rel="stylesheet" href="/css/navbar-button.css">
 </head>
 
 <body style="height: 100%;">
