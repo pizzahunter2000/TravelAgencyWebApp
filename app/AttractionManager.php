@@ -2,7 +2,6 @@
 
 class AttractionManager extends Controller
 {
-	//! Display content of Home page
 	function showAllAttractions($f3, $args)
 	{
 		require 'requirements.php';
