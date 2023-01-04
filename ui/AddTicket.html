@@ -1,22 +1,41 @@
-<form method="POST" enctype="multipart/form-data" style="margin: 30px;">
+<div class="row">
+  <check if="{{ @errorMessage != ''}}">
+    <true>
+      <div class="panel panel-default bg-warning text-white">
+        <div class="panel-body">
+          {{ @errorMessage }}
+        </div>
+      </div>
+    </true>
+  </check>
+</div>
+
+<a href="/viewTickets" type="button" class="btn btn-dark" style="margin: 30px">Go Back</a>
+
+<form method="POST" enctype="multipart/form-data" style="margin-left: 30px;">
     <div class="form-group">
       <label for="personName">Customer Name</label>
-      <input type="text" class="form-control" id="personName" placeholder="Enter name" style="width: 200px;">
+      <input type="text" class="form-control" id="personName" name="person" placeholder="Enter name" style="width: 200px;"
+          required>
       <small class="invalid-feedback">Name entered is incorrect</small>
     </div>
     <div class="form-group">
         <label for="attractionName">Attraction Name</label>
-        <input type="text" class="form-control" id="attractionName" placeholder="Enter attraction name" style="width: 200px;">
+        <input type="text" class="form-control" id="attractionName" name="attraction" placeholder="Enter attraction name"
+          style="width: 200px;" required>
         <small class="invalid-feedback">Attraction entered is incorrect</small>
     </div>
     <div class="form-group">
         <label for="ticketPrice">Ticket Price</label>
-        <input type="text" class="form-control" id="ticketPrice" placeholder="Enter ticket price" style="width: 200px;">
-        <small class="invalid-feedback">Attraction entered is incorrect</small>
+        <input type="text" class="form-control" id="ticketPrice" name="price" placeholder="Enter ticket price"
+          style="width: 200px;" required>
+        <small class="invalid-feedback">Price entered is incorrect</small>
     </div>
     <div class="form-check">
-      <input type="checkbox" class="form-check-input" id="checkbox">
+      <input type="checkbox" class="form-check-input" id="checkbox" required>
       <label class="form-check-label" for="checkbox">I know what I'm doin'</label>
+      <small class="invalid-feedback">Attraction entered is incorrect</small>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
+  
