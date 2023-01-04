@@ -2,7 +2,7 @@
 
 class TicketManager extends Controller
 {
-	function viewTickets($f3, $args)
+	function viewTickets($f3)
 	{
 		require 'requirements.php';
 
@@ -114,4 +114,14 @@ class TicketManager extends Controller
 				}
 	}
 
+	function viewTicketsAct($f3){
+		require 'requirements.php';
+
+			$ticketMap = new DB\SQL\Mapper($db, 'ticket');
+			$ticketToDelete = $ticketMap->findone(array('id = ?', $_POST["id"]));
+
+			$ticketToDelete->erase();
+
+			$f3->reroute('/viewTickets');
+	}
 }

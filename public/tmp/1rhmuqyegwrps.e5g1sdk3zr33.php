@@ -11,16 +11,6 @@
             </a>
         </li>
         <li>
-            <a href="#" class="nav-link text-secondary">
-            Delete Ticket
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-link text-secondary">
-            Update Ticket
-            </a>
-        </li>
-        <li>
             <a href="/mainPage" class="nav-link text-secondary">
             Home
             </a>

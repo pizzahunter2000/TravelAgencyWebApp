@@ -12,16 +12,24 @@
     </thead>
     <tbody>
         <?php foreach (($tickets?:[]) as $ticket): ?>
+          <form method="POST" enctype="multipart/form-data">
             <tr>
-                <th scope="row"><?= ($ticket['id']) ?></th>
-                <th><?= ($ticket['person']) ?></th>
-                <th><?= ($ticket['attraction']) ?></th>
-                <th><?= ($ticket['price']) ?> &euro;</th>
-                <th>
-                  <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                  <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                </th>
+              <th scope="row" name="id"><?= ($ticket['id']) ?></th>
+              <th><?= ($ticket['person']) ?></th>
+              <th><?= ($ticket['attraction']) ?></th>
+              <th><?= ($ticket['price']) ?> &euro;</th>
+              <th>
+                  <a class="edit btn btn-dark" title="Edit" name="Edit" data-toggle="tooltip" href="/mainPage">
+                    <i class="material-icons">&#xE254;</i>
+                  </a>
+                  <input type="hidden" name="id" value=<?= ($ticket['id']) ?>>
+                  <button class="delete btn btn-dark" title="Delete" name="Delete" data-toggle="tooltip"
+                      onclick="return confirm('Are you sure you want to delete this ticket');">
+                    <i class="material-icons">&#xE872;</i>
+                  </button>
+              </th>
             </tr>
+          </form>
         <?php endforeach; ?>
     </tbody>
   </table>
