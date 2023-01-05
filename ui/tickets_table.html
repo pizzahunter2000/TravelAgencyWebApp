@@ -19,7 +19,7 @@
               <th>{{@ticket.attraction}}</th>
               <th>{{@ticket.price}} &euro;</th>
               <th>
-                  <a class="edit btn btn-dark" title="Edit" name="Edit" data-toggle="tooltip" href="/mainPage">
+                  <a class="edit btn btn-dark" title="Edit" name="Edit" data-toggle="tooltip" href="/updateTicket/{{@ticket.id}}">
                     <i class="material-icons">&#xE254;</i>
                   </a>
                   <input type="hidden" name="id" value={{@ticket.id}}>

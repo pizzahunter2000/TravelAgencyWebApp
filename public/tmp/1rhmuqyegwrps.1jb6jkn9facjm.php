@@ -6,6 +6,11 @@
     </a>
     <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
         <li>
+            <a href="/viewCustomers" class="nav-link text-secondary">
+                Customers
+            </a>
+        </li>
+        <li>
             <a href="/viewTickets" class="nav-link text-secondary">
             Tickets
             </a>

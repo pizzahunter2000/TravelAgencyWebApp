@@ -93,8 +93,8 @@ class TicketManager extends Controller
 					$attrId = $db->exec("SELECT id FROM attraction WHERE attr_name LIKE '%" . $ticket->attraction . "%'");
 
 					$ticketMap->price = $ticket->price;
-					echo var_dump($personId);
-					echo var_dump($attrId);
+					//echo var_dump($personId);
+					//echo var_dump($attrId);
 					$ticketMap->person_id = $personId[0]["id"];
 					$ticketMap->attraction_id = $attrId[0]["id"];
 
@@ -124,4 +124,164 @@ class TicketManager extends Controller
 
 			$f3->reroute('/viewTickets');
 	}
+
+	function updateTicket($f3, $args){
+		require 'requirements.php';
+
+		$f3->set('errorMessage', "");
+		$f3->set('html_title', 'Update Ticket');
+		$f3->set('content', 'UpdateTicket.html');
+		echo \Template::instance()->render('Layout.html');
+	}
+
+	function validPersonName($f3, &$errorMessage, $ticket){
+		require 'requirements.php';
+
+		$valid = true;
+
+		if(!preg_match("/^[a-zA-Z-' ]*$/", $ticket->person)){
+			$errorMessage = $errorMessage . ' - Customer name invalid - ';
+			$valid = false;
+		}
+		$countPeople = $db->exec("SELECT count(*) FROM person WHERE name LIKE '%". $ticket->person . "%'");
+		//echo "Count(people): " . var_dump($countPeople);
+		if(0 == $countPeople[0]["count"]){
+			$errorMessage = $errorMessage . ' - Person not found -';
+			$valid = false;
+		}
+		else{
+			if(2 <= $countPeople[0]["count"]){
+				$errorMessage = $errorMessage . ' - Too many people found - ';
+				$valid = false;
+			}
+		}
+
+		return $valid;
+	}
+
+	function validAttrName($f3, &$errorMessage, $ticket){
+		require 'requirements.php';
+
+		$valid = true;
+
+		if(!preg_match("/^[a-zA-Z-' ]*$/", $ticket->attraction)){
+			$errorMessage = $errorMessage . ' - Attraction name invalid - ';
+			$valid = false;
+		}
+		$countAttr = $db->exec("SELECT count(*) FROM attraction WHERE attr_name LIKE '%". $ticket->attraction . "%'");
+		if(0 == $countAttr[0]["count"]){
+			$errorMessage = $errorMessage . ' - Attraction not found - ';
+			$valid = false;
+		}
+		else{
+			if(2 <= $countAttr[0]["count"]){
+				$errorMessage = $errorMessage . ' - Too many attractions found - ';
+				$valid = false;
+			}
+		}
+
+		return $valid;
+	}
+
+	function validPrice($f3, &$errorMessage, $ticket){
+		require 'requirements.php';
+
+		$valid = true;
+
+		if(!preg_match("/^[0-9.,]*$/", $ticket->price)){
+			$errorMessage = $errorMessage . ' - Price invalid - ';
+			$valid = false;
+		}
+
+		return $valid;
+	}
+
+	
+	function updateTicketAct($f3, $args)
+	{
+		require 'requirements.php';
+
+				$ticketMap = new DB\SQL\Mapper($db, 'ticket');
+				$ticket = new class{
+				};
+				$ticket->person = "";
+				$ticket->attraction = "";
+				$ticket->price = 0;
+
+				$ticket->person = $_POST['person'];
+				$ticket->attraction = $_POST['attraction'];
+				$ticket->price = $_POST['price'];
+				
+				$errorMessage = "";
+
+				$validName = TicketManager::validPersonName($f3, $errorMessage, $ticket);
+				$validAttrName = TicketManager::validAttrName($f3, $errorMessage, $ticket);
+				$validPrice = TicketManager::validPrice($f3, $errorMessage, $ticket);
+
+				$oldTicket = new DB\SQL\Mapper($db, 'ticket');
+				$oldTicket->load(array('id = ?', $f3->get('PARAMS.id')));
+
+				/*if($oldTicket->dry()){
+					echo "No data found with id: " . $f3->get('PARAMS.id');
+				}*/
+
+				echo "Something: " . $f3->get('PARAMS.id');
+			//	echo "Something again: " . var_dump($oldTicket);
+			//	echo "Something again: " . var_dump($ticket);
+				$correctInput = 0;
+
+				if($validName){
+					$personId = $db->exec("SELECT id FROM person WHERE name LIKE '%" . $ticket->person . "%'");
+					//echo "Person id: " . var_dump($personId);
+					if($ticket->person != ""){
+						$oldTicket->person_id = $personId[0]["id"];
+					}
+					$correctInput = 1;
+				}
+				else {
+					if($ticket->person == ""){
+						$correctInput = 1;
+					}
+				}
+
+				if($validAttrName){
+					$attrId = $db->exec("SELECT id FROM attraction WHERE attr_name LIKE '%" . $ticket->attraction . "%'");
+					if($ticket->attraction != ""){
+						$oldTicket->attraction_id = $attrId[0]["id"];
+					}
+					$correctInput = 1;
+				}
+				else {
+					if($ticket->attraction == ""){
+						$correctInput = 1;
+					}
+				}
+
+				if($validPrice){
+					if($ticket->price != ""){
+						//echo "Before: " . var_dump($oldTicket->price);
+						$oldTicket->price = $ticket->price;
+						//echo "After: " . var_dump($oldTicket->price);
+					}
+					$correctInput = 1;
+				}
+				else { 
+					if($ticket->price == ""){
+						$correctInput = 1;
+					}
+				}
+
+				if($correctInput == 1){
+					$oldTicket->save();
+					$oldTicket->reset();
+					//$ticketMap->save();
+					$f3->reroute("/viewTickets");
+				} else {
+					$f3->set('errorMessage', $errorMessage);
+					$f3->set('html_title', 'Update Ticket');
+					$f3->set('content', 'UpdateTicket.html');
+					echo \Template::instance()->render('Layout.html');
+				}
+	}
+
 }
